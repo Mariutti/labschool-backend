@@ -16,13 +16,13 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("acompanhamentos")
+@RequestMapping("/")
 public class AcompanhamentoController {
 
     @Autowired
     private AcompanhamentoRepository acompanhamentoRepository;
 
-    @PostMapping("acompanhamento")
+    @PostMapping("acompanhamentos")
     public ResponseEntity<AcompanhamentoPedagogicoModel> saveAcompanhamento(@RequestBody @Valid AcompanhamentoDto acompanhamentoDto){
         var acompanhamentoModel = new AcompanhamentoPedagogicoModel();
 
@@ -35,7 +35,7 @@ public class AcompanhamentoController {
         return ResponseEntity.status(HttpStatus.OK).body(acompanhamentoRepository.findAllAcompanhamentos());
     }
 
-    @PutMapping("acompanhamento/{id}")
+    @PutMapping("acompanhamentos/{id}")
     public ResponseEntity<Object>  updateAcompanhamento(@PathVariable(value="id") UUID id, @RequestBody @Valid AcompanhamentoDto acompanhamento){
         Optional<AcompanhamentoPedagogicoModel> acompanhamentoO = acompanhamentoRepository.findById(id);
         if(acompanhamentoO.isEmpty()){
