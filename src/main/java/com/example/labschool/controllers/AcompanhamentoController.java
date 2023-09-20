@@ -23,7 +23,7 @@ public class AcompanhamentoController {
     @Autowired
     private AcompanhamentoRepository acompanhamentoRepository;
 
-    @PostMapping("acompanhamentoS")
+    @PostMapping("acompanhamentos")
     public ResponseEntity<AcompanhamentoPedagogicoModel> saveAcompanhamento(@RequestBody @Valid AcompanhamentoDto acompanhamentoDto){
         var acompanhamentoModel = new AcompanhamentoPedagogicoModel();
 
