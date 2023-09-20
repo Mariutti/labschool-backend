@@ -36,7 +36,7 @@ public class AcompanhamentoController {
         return ResponseEntity.status(HttpStatus.OK).body(acompanhamentoRepository.findAllAcompanhamentos());
     }
 
-    @PutMapping("acompanhamentoS/{id}")
+    @PutMapping("acompanhamentos/{id}")
     public ResponseEntity<Object>  updateAcompanhamento(@PathVariable(value="id") UUID id, @RequestBody @Valid AcompanhamentoDto acompanhamento){
         Optional<AcompanhamentoPedagogicoModel> acompanhamentoO = acompanhamentoRepository.findById(id);
         if(acompanhamentoO.isEmpty()){

@@ -12,7 +12,11 @@ import java.util.UUID;
 @Repository
 public interface AcompanhamentoRepository extends JpaRepository<AcompanhamentoPedagogicoModel, UUID> {
 
-    @Query(value = "SELECT new com.example.labschool.dtos.AcompanhamentoPedDto(ac.titulo, al.nome, pd.nome, ac.dataAcompanhamento, ac.finalizado) FROM com.example.labschool.models.AcompanhamentoPedagogicoModel ac INNER JOIN ac.aluno al INNER JOIN ac.pedagogo pd")
+    @Query(value="SELECT new com.example.labschool.dtos.AcompanhamentoPedDto(ac.id, ac.titulo, al.nome, pd.nome, ac" +
+            ".dataAcompanhamento, ac.finalizado) "
+            + "FROM com.example.labschool.models.AcompanhamentoPedagogicoModel ac "
+            + "INNER JOIN ac.aluno al "
+            + "INNER JOIN ac.pedagogo pd")
     List<AcompanhamentoPedDto> findAllAcompanhamentos();
 
 }
