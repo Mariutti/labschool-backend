@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.UUID;
 
 @Entity
-@Table(name = "tb_acompanhamentos")
+@Table(name = "TB_ACOMPANHAMENTO")
 @Data
 public class AcompanhamentoPedagogicoModel {
 

@@ -1,3 +1,4 @@
+
 package com.example.labschool.controllers;
 
 import com.example.labschool.dtos.AcompanhamentoDto;
@@ -22,7 +23,7 @@ public class AcompanhamentoController {
     @Autowired
     private AcompanhamentoRepository acompanhamentoRepository;
 
-    @PostMapping("acompanhamentos")
+    @PostMapping("acompanhamentoS")
     public ResponseEntity<AcompanhamentoPedagogicoModel> saveAcompanhamento(@RequestBody @Valid AcompanhamentoDto acompanhamentoDto){
         var acompanhamentoModel = new AcompanhamentoPedagogicoModel();
 
@@ -35,7 +36,7 @@ public class AcompanhamentoController {
         return ResponseEntity.status(HttpStatus.OK).body(acompanhamentoRepository.findAllAcompanhamentos());
     }
 
-    @PutMapping("acompanhamentos/{id}")
+    @PutMapping("acompanhamentoS/{id}")
     public ResponseEntity<Object>  updateAcompanhamento(@PathVariable(value="id") UUID id, @RequestBody @Valid AcompanhamentoDto acompanhamento){
         Optional<AcompanhamentoPedagogicoModel> acompanhamentoO = acompanhamentoRepository.findById(id);
         if(acompanhamentoO.isEmpty()){
