@@ -93,7 +93,6 @@ public class PedagogoController {
     @GetMapping("pedagogos/name")
     public ResponseEntity<List<PedagogoSeletorDto>> getPedagogo(){
         LOGGER.info("Listagem de Pedagogos por ID e NOME concluída");
-
-        return ResponseEntity.status(HttpStatus.OK).body(pedagogoRepository.findAllByIdName());
+        return  ResponseEntity.status(HttpStatus.OK).body(pedagogoRepository.findByIdName());
     }
 }
