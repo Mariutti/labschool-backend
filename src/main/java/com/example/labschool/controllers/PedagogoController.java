@@ -1,9 +1,12 @@
 package com.example.labschool.controllers;
 
 import com.example.labschool.dtos.PedagogoDto;
+import com.example.labschool.dtos.PedagogoSeletorDto;
 import com.example.labschool.models.PedagogoModel;
 import com.example.labschool.repositories.PedagogoRepository;
 import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,16 +24,21 @@ public class PedagogoController {
     @Autowired
     PedagogoRepository pedagogoRepository;
 
+    private static Logger LOGGER = LoggerFactory.getLogger(PedagogoController.class);
+
     @PostMapping("pedagogos")
     public ResponseEntity<PedagogoModel> savePedagogo(@RequestBody @Valid PedagogoDto pedagogoDto ) {
         var pedagogoModel = new PedagogoModel();
 
         BeanUtils.copyProperties(pedagogoDto, pedagogoModel);
+        LOGGER.info("Instância Pedadodo cadastrada. " + pedagogoDto.nome());
         return ResponseEntity.status(HttpStatus.CREATED).body(pedagogoRepository.save(pedagogoModel));
     }
 
     @GetMapping("pedagogos")
     public ResponseEntity<List<PedagogoDto>> getAllPedagogos (){
+        LOGGER.info("Listagem Pedagogos concluída.");
+
         return ResponseEntity.status(HttpStatus.OK).body(pedagogoRepository.findAll()
                 .stream()
                 .map(PedagogoDto::new)
@@ -44,9 +52,12 @@ public class PedagogoController {
         Optional<PedagogoModel> pedagogoO = pedagogoRepository.findById(id);
 
         if(pedagogoO.isEmpty()){
+            LOGGER.info("Pedagogo não foi identificado.");
+
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pedagogo not found");
         }
         Optional<PedagogoDto> pedagogoDto = pedagogoO.map(PedagogoDto::new);
+        LOGGER.info("Consulta Pedagogo concluída.");
 
         return ResponseEntity.status(HttpStatus.OK).body(pedagogoDto.get());
     }
@@ -77,5 +88,12 @@ public class PedagogoController {
 
         pedagogoRepository.deleteById(id);
         return ResponseEntity.status(HttpStatus.OK).body("Pedagogo deleted successfully.");
+    }
+
+    @GetMapping("pedagogos/name")
+    public ResponseEntity<List<PedagogoSeletorDto>> getPedagogo(){
+        LOGGER.info("Listagem de Pedagogos por ID e NOME concluída");
+
+        return ResponseEntity.status(HttpStatus.OK).body(pedagogoRepository.findAllByIdName());
     }
 }
