@@ -13,7 +13,7 @@ import com.example.labschool.models.PedagogoModel;
 @Repository
 public interface PedagogoRepository extends JpaRepository<PedagogoModel, UUID>{
 
-    @Query(value="SELECT new com.example.labschool.Dtos.PedagogoSeletorDto(pd.id, pd.nome)"
+    @Query(value="SELECT new com.example.labschool.dtos.PedagogoSeletorDto(pd.id, pd.nome)"
             + "FROM com.example.labschool.models.PedagogoModel pd")
     List<PedagogoSeletorDto> findByIdName();
 }
